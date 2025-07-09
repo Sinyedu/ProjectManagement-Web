@@ -1,14 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
-
-export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
+import React from "react";
+import {
+  LoginPageProvider,
+  useLoginPage,
+} from "@/core/contexts/LoginPageContext";
+function LoginForm() {
+  const { email, setEmail, password, setPassword, handleSubmit } =
+    useLoginPage();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -52,5 +51,13 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <LoginPageProvider>
+      <LoginForm />
+    </LoginPageProvider>
   );
 }
