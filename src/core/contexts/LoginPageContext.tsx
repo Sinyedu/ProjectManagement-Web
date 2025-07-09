@@ -1,6 +1,8 @@
 "use client";
 
 import React, { createContext, useState, useContext, ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import { fakeLogin } from "@/core/services/auth.service";
 
 type LoginContextType = {
   email: string;
@@ -15,12 +17,18 @@ const LoginPageContext = createContext<LoginContextType | undefined>(undefined);
 export const LoginPageProvider = ({ children }: { children: ReactNode }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-    // TODO: login logic here
+
+    try {
+      const user = fakeLogin(email, password);
+      console.log("Login successful:", user);
+      router.push("/projects");
+    } catch (err) {
+      alert("Invalid email or password");
+    }
   };
 
   return (
