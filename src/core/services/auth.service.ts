@@ -1,6 +1,6 @@
 //TODO Create an auth service that handles user authentication, including login, logout, and session management.
-
 import { dummyUsers } from "@/core/data/dummyUsers";
+import { AuthError } from "@/core/errors/authError";
 
 export function fakeLogin(email: string, password: string) {
   const user = dummyUsers.find(
@@ -8,10 +8,9 @@ export function fakeLogin(email: string, password: string) {
   );
 
   if (!user) {
-    throw new Error("Invalid email or password");
+    throw new AuthError("Invalid email or password");
   }
 
-  // Simulate setting auth state
   localStorage.setItem("user", JSON.stringify(user));
   return user;
 }

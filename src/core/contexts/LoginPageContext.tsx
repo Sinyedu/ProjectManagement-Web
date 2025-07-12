@@ -4,6 +4,7 @@ import React, { createContext, useState, useContext, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { fakeLogin } from "@/core/services/auth.service";
 import { toast } from "sonner";
+import { AuthError } from "@/core/errors/authError";
 
 type LoginContextType = {
   email: string;
@@ -28,7 +29,11 @@ export const LoginPageProvider = ({ children }: { children: ReactNode }) => {
       toast.success(`Welcome back, ${user.name || "user"}!`);
       router.push("/projects");
     } catch (err) {
-      toast.error("Invalid email or password");
+      if (err instanceof AuthError) {
+        toast.error(err.message);
+      } else {
+        toast.error("Unexpected error. Please try again.");
+      }
     }
   };
 
