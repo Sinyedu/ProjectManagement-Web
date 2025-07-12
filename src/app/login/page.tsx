@@ -21,7 +21,7 @@ function LoginForm() {
             <input
               id="email"
               type="email"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-950"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -35,7 +35,7 @@ function LoginForm() {
             <input
               id="password"
               type="password"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-950"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

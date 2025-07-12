@@ -3,6 +3,7 @@
 import React, { createContext, useState, useContext, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { fakeLogin } from "@/core/services/auth.service";
+import { toast } from "sonner";
 
 type LoginContextType = {
   email: string;
@@ -24,10 +25,10 @@ export const LoginPageProvider = ({ children }: { children: ReactNode }) => {
 
     try {
       const user = fakeLogin(email, password);
-      console.log("Login successful:", user);
+      toast.success(`Welcome back, ${user.name || "user"}!`);
       router.push("/projects");
     } catch (err) {
-      alert("Invalid email or password");
+      toast.error("Invalid email or password");
     }
   };
 
